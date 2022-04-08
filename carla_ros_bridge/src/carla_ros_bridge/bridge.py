@@ -570,7 +570,15 @@ def main():
     main function for carla simulator ROS bridge
     maintaining the communication client and the CarlaBridge object
     """
+    rospy.loginfo("hello world! This is python!!")
+    print("abcc ---- ")
+    # rospy.loginfo("Hello this is cAspar")
     rospy.init_node("carla_bridge", anonymous=True)
+    rospy.loginfo(" 9999  __main__")
+
+
+
+
     parameters = rospy.get_param('carla')
     rospy.loginfo("Trying to connect to {host}:{port}".format(
         host=parameters['host'], port=parameters['port']))
@@ -622,6 +630,11 @@ def main():
         del carla_world
         del carla_client
 
+    # rospy.spin()
+
+
 
 if __name__ == "__main__":
+    # rospy.loginfo(" 9999  __main__")
     main()
+
