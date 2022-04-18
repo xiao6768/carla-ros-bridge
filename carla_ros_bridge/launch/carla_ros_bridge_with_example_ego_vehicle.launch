@@ -7,11 +7,11 @@
 
   <!-- Ego vehicle -->
   <arg name='role_name' default='ego_vehicle'/>
-  <arg name="vehicle_filter" default='vehicle.*'/>
-  <arg name="spawn_point" default=""/><!-- use comma separated format "x,y,z,roll,pitch,yaw" -->
+  <arg name="vehicle_filter" default='vehicle.toyota.*'/>
+  <arg name="spawn_point" default="-8.7,95.6,0.0,0.0,0.0,0.0"/><!-- use comma separated format "x,y,z,roll,pitch,yaw" -->
 
   <!-- Map to load on startup (either a predefined CARLA town (e.g. 'Town01'), or a OpenDRIVE map file) -->
-  <arg name="town" default=''/>
+  <arg name="town" default='town05'/>
 
   <!-- Synchronous mode-->
   <arg name='synchronous_mode' default=''/>
@@ -41,5 +41,12 @@
   <include file="$(find carla_manual_control)/launch/carla_manual_control.launch">
     <arg name='role_name' value='$(arg role_name)'/>
   </include>
+
+
+  <!-- <include file="$(find carla_waypoint_publisher)/launch/carla_waypoint_publisher.launch" >
+    <arg name='host' value='$(arg host)'/>
+    <arg name='port' value='$(arg port)'/>
+    <arg name="role_name" value='$(arg role_name)'/>
+  </include> -->
 
 </launch>
