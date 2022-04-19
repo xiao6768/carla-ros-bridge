@@ -45,6 +45,9 @@ class Gnss(Sensor):
         self.gnss_publisher = rospy.Publisher(self.get_topic_prefix() + '/fix',
                                               NavSatFix,
                                               queue_size=10)
+        self.autoware_gnss_publisher = rospy.Publisher("/gnss_pose",
+                                              NavSatFix,
+                                              queue_size=10)
         self.listen()
 
     # pylint: disable=arguments-differ
@@ -61,3 +64,5 @@ class Gnss(Sensor):
         navsatfix_msg.longitude = carla_gnss_measurement.longitude
         navsatfix_msg.altitude = carla_gnss_measurement.altitude
         self.gnss_publisher.publish(navsatfix_msg)
+        
+        self.autoware_gnss_publisher.publish(navsatfix_msg)

@@ -47,6 +47,9 @@ class Lidar(Sensor):
                                                "/point_cloud",
                                                PointCloud2,
                                                queue_size=10)
+        self.autoware_lidar_publisher = rospy.Publisher("/points_raw",
+                                               PointCloud2,
+                                               queue_size=10)
         self.listen()
 
     # pylint: disable=arguments-differ
@@ -74,6 +77,9 @@ class Lidar(Sensor):
         lidar_data[:, 1] *= -1
         point_cloud_msg = create_cloud(header, fields, lidar_data)
         self.lidar_publisher.publish(point_cloud_msg)
+
+        point_cloud_msg.header.frame_id="velodyne"
+        self.autoware_lidar_publisher.publish(point_cloud_msg)
 
 
 class SemanticLidar(Sensor):
@@ -138,3 +144,4 @@ class SemanticLidar(Sensor):
         lidar_data['y'] *= -1
         point_cloud_msg = create_cloud(header, fields, lidar_data.tolist())
         self.semantic_lidar_publisher.publish(point_cloud_msg)
+

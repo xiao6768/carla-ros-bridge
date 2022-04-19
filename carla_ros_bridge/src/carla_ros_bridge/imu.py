@@ -41,6 +41,7 @@ class ImuSensor(Sensor):
                                         prefix="imu/" + carla_actor.attributes.get('role_name'))
 
         self.imu_publisher = rospy.Publisher(self.get_topic_prefix(), Imu, queue_size=10)
+        self.autoware_imu_publisher = rospy.Publisher("/imu_raw", Imu, queue_size=10)
         self.listen()
 
     # pylint: disable=arguments-differ
@@ -70,3 +71,4 @@ class ImuSensor(Sensor):
         quat = trans.carla_rotation_to_numpy_quaternion(imu_rotation)
         imu_msg.orientation = trans.numpy_quaternion_to_ros_quaternion(quat)
         self.imu_publisher.publish(imu_msg)
+        self.autoware_imu_publisher.publish(imu_msg)

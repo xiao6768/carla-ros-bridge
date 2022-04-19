@@ -48,7 +48,9 @@ class TrafficParticipant(Actor):
                                                   "/odometry",
                                                   Odometry,
                                                   queue_size=10)
-
+        self.autoware_odometry_publisher = rospy.Publisher("/vehicle/odom",
+                                                  Odometry,
+                                                  queue_size=10)
     def update(self, frame, timestamp):
         """
         Function (override) to update this object.
@@ -77,6 +79,7 @@ class TrafficParticipant(Actor):
         odometry.pose.pose = self.get_current_ros_pose()
         odometry.twist.twist = self.get_current_ros_twist_rotated()
         self.odometry_publisher.publish(odometry)
+        self.autoware_odometry_publisher.publish(odometry)
 
     def get_object_info(self):
         """
