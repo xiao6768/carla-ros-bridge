@@ -64,5 +64,5 @@ class Gnss(Sensor):
         navsatfix_msg.longitude = carla_gnss_measurement.longitude
         navsatfix_msg.altitude = carla_gnss_measurement.altitude
         self.gnss_publisher.publish(navsatfix_msg)
-        
+
         self.autoware_gnss_publisher.publish(navsatfix_msg)

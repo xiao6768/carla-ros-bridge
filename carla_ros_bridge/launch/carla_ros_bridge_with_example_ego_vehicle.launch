@@ -8,10 +8,13 @@
   <!-- Ego vehicle -->
   <arg name='role_name' default='ego_vehicle'/>
   <arg name="vehicle_filter" default='vehicle.toyota.*'/>
-  <arg name="spawn_point" default="-8.7,95.6,0.0,0.0,0.0,0.0"/><!-- use comma separated format "x,y,z,roll,pitch,yaw" -->
+  <!-- use comma separated format "x,y,z,roll,pitch,yaw" -->
+  <!-- <arg name="spawn_point" default="-8.7,95.6,0.0,0.0,0.0,0.0"/>
+  <arg name="town" default='town05'/> -->
 
+  <arg name="spawn_point" default="229.0,129.8,0.0,0.0,0.0,180"/>  
+  <arg name="town" default='town01'/>
   <!-- Map to load on startup (either a predefined CARLA town (e.g. 'Town01'), or a OpenDRIVE map file) -->
-  <arg name="town" default='town05'/>
 
   <!-- Synchronous mode-->
   <arg name='synchronous_mode' default=''/>
