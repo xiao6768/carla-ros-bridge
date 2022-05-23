@@ -70,16 +70,21 @@ class Lidar(Sensor):
 
         lidar_data = numpy.fromstring(
             bytes(carla_lidar_measurement.raw_data), dtype=numpy.float32)
+        row = int(lidar_data.shape[0] / 4)
         lidar_data = numpy.reshape(
-            lidar_data, (int(lidar_data.shape[0] / 4), 4))
+            lidar_data, (row, 4))
+        
+        for single_row in lidar_data :
+            single_row[3] = int( single_row[3] * 255)
+            # print(single_row)
         # we take the oposite of y axis
         # (as lidar point are express in left handed coordinate system, and ros need right handed)
         lidar_data[:, 1] *= -1
         point_cloud_msg = create_cloud(header, fields, lidar_data)
-        self.lidar_publisher.publish(point_cloud_msg)
-
         point_cloud_msg.header.frame_id="velodyne"
         self.autoware_lidar_publisher.publish(point_cloud_msg)
+
+        # self.autoware_lidar_publisher.publish(point_cloud_msg)
 
 
 class SemanticLidar(Sensor):
